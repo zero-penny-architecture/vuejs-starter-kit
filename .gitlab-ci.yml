@@ -1,0 +1,111 @@
+variables:
+  DOCKER_HOST: tcp://docker:2375
+  DOCKER_DRIVER: overlay2
+  CONTAINER_NAME: $CI_REGISTRY/your-gitlab-project-path
+  CONTAINER_NAME_HEROKU: registry.heroku.com/$APP_NAME/web
+
+stages:
+  - Build Artifacts
+  - Prepare Docker Images
+  - Deploy Application
+
+.Build Vue App: &build
+  image: node:12.6.0-stretch
+  stage: Build Artifacts
+  cache:
+    paths:
+      - .yarncache
+  script:
+    - yarn install --progress=false --cache-folder .yarncache
+    - echo $AUTH0_CONFIG_JSON >> ./auth0_config.json
+    - yarn vue-cli-service build --mode $BUILD_MODE
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist
+
+Build Vue App (Development):
+  <<: *build
+  variables:
+    BUILD_MODE: development
+  except:
+    - tags
+
+Build Vue App (Production):
+  <<: *build
+  variables:
+    BUILD_MODE: production
+  only:
+    - tags
+
+.Push To Registry: &push-docker
+  stage: Prepare Docker Images
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
+    - docker build -t $CONTAINER_NAME:$IMAGE_TAG .
+    - docker push $CONTAINER_NAME:$IMAGE_TAG
+
+Push image to Registry:
+  <<: *push-docker
+  variables:
+    IMAGE_TAG: development
+  dependencies: 
+    - Build Vue App (Development)
+  needs:
+    - Build Vue App (Development)
+  except:
+    - tags
+
+Push tag image:
+  <<: *push-docker
+  variables:
+    IMAGE_TAG: $CI_COMMIT_REF_SLUG
+  dependencies: 
+    - Build Vue App (Production)
+  needs:
+    - Build Vue App (Production)
+  only:
+    - tags
+   
+.Deploy to Heroku: &deploy-heroku
+  stage: Deploy Application
+  image: docker:stable
+  services:
+    - docker:dind
+  
+  before_script:
+    - echo $CI_JOB_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
+    - docker pull $CONTAINER_NAME:$IMAGE_TAG
+  script:
+    - echo "$HEROKU_API_KEY" | docker login -u _ --password-stdin registry.heroku.com
+    - docker tag $CONTAINER_NAME:$IMAGE_TAG $CONTAINER_NAME_HEROKU
+    - docker push $CONTAINER_NAME_HEROKU
+    - docker run -e HEROKU_API_KEY=$HEROKU_API_KEY wingrunr21/alpine-heroku-cli:latest container:release web -a $APP_NAME
+
+Deploy to Development:
+  <<: *deploy-heroku
+  environment: development
+  variables:
+    IMAGE_TAG: development
+    APP_NAME: "app-name-for-development"
+  needs: 
+    - Build Vue App (Development)
+    - Push image to Registry
+  except:
+    - tags
+
+Deploy to Production:
+  <<: *deploy-heroku
+  environment: production
+  variables:
+    IMAGE_TAG: $CI_COMMIT_REF_SLUG
+    APP_NAME: "app-name-for-production"
+  needs: 
+    - Build Vue App (Production)
+    - Push tag image
+  only:
+    - tags
+  when: manual
