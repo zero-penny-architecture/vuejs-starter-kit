@@ -8,10 +8,9 @@
     </div>
 </template>
 <script lang="ts">
-import Vue from 'vue';
+import { Vue, Component } from 'vue-class-decorator';
 
 import { example } from "@/vuex";
-import Component from 'vue-class-component';
 
 @Component({})
 export default class HomePage extends Vue {
