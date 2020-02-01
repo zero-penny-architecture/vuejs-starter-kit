@@ -4,7 +4,8 @@
       <strong> value from Vuex: {{example.currentExampleValue}}</strong><br/>
       <button @click="showAlert()"> Click Me! </button><br/>
       <button @click="triggerIncrement()"> INCREMENT! </button><br/>
-      <button @click="goToAbout()"> Go to About! </button>
+      <button @click="goToAbout()"> Go to About! </button><br/>
+      <button @click="goToComponent()"> Go to Component page </button>
     </div>
 </template>
 <script lang="ts">
@@ -31,6 +32,12 @@ export default class HomePage extends Vue {
     goToAbout() : void {
         this.$router.push({
             name: "about"
+        });
+    }
+
+    goToComponent() : void {
+        this.$router.push({
+            name: "comp"
         });
     }
 

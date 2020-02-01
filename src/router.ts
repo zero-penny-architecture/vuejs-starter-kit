@@ -4,7 +4,8 @@ import { Route } from 'vue-router/types/router';
 
 import { 
   HomePage,
-  AboutPage
+  AboutPage,
+  WithComponentsPage
 } from "@/views";
 
 Vue.use(Router);
@@ -24,6 +25,12 @@ const router = new Router({
       name: "about",
       component: AboutPage,
       meta: { title : "VueJS Typescript Starter Kit - About" },
+    },
+    {
+      path: "/comp",
+      name: "comp",
+      component: WithComponentsPage,
+      meta: { title : "VueJS Typescript Starter Kit - Components" },
     },
   ]
 });
