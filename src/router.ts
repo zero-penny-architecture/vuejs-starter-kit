@@ -27,8 +27,8 @@ const router = new Router({
       meta: { title : "VueJS Typescript Starter Kit - About" },
     },
     {
-      path: "/comp",
-      name: "comp",
+      path: "/todos",
+      name: "todos",
       component: WithComponentsPage,
       meta: { title : "VueJS Typescript Starter Kit - Components" },
     },
