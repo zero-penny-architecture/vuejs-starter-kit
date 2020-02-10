@@ -1,6 +1,6 @@
-# vuejs-typescript-starter-kit
+# Zeropenny Frontend Starter Kit
 
-A VueJS project which includes Navigation (vue-router), State management (vuex) all in an OOP Typescript flavour.
+A VueJS project which includes Navigation (vue-router), State management (vuex) all in an OOP Typescript flavour. Inspired by the [`Zero Penny Architecture`](https://medium.com/@saniales/the-0-penny-architecture-explained-how-i-created-a-complete-development-environment-composing-4f1318c71a17) concept.
 
 ## Prerequisites
 
