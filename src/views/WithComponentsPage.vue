@@ -14,7 +14,7 @@
 			</span>
 		</div>
 
-		<AddRemoveElementTest class="m-1" :todos="todos"></AddRemoveElementTest>
+		<AddRemoveElementTest class="m-1" :todos="todos" @myChildEvent="onmyChildEventMsg"></AddRemoveElementTest>
 
 		<ListElementTest class="m-1" :todos="todos"></ListElementTest>
 	</div>
@@ -24,7 +24,7 @@ import { Vue, Component } from 'vue-class-decorator';
 import { ListElementTest } from '@/components'
 import { AddRemoveElementTest } from '@/components'
 import { todos } from "@/vuex";
-import EventBus from "@/eventBus";
+//import EventBusGolbal from "@/eventBus";
 
 @Component({
 	components: {
@@ -38,7 +38,7 @@ export default class WithComponentsPage extends Vue {
 	private myChildEventMsg: { who: string, content: string } = { who: "", content: "" };
 
 	mounted(): void {
-		EventBus.$on("my-child-event", this.onmyChildEventMsg);
+		//EventBusGolbal.$on("myChildEvent", this.onmyChildEventMsg);
 	}
 
 	get computedInfo(): number {
