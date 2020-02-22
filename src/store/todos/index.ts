@@ -26,6 +26,9 @@ export default class TodosStore extends VuexModule {
         return [...this.todos];
     }
 
+    @action async clearTodos() {
+        this.todos = [];
+    }
 
     @action async add(todo: Todo): Promise<void> {
         this.todos = [...this.todos, todo];
@@ -48,11 +51,11 @@ export default class TodosStore extends VuexModule {
             this.todos = a;
             */
             let i = -1, len = t.length, k = 0;
-            let a = new Array(len-1);
-            while(++i < index)
+            let a = new Array(len - 1);
+            while (++i < index)
                 a[i] = t[i];
             k = i;
-            while(++i < len)
+            while (++i < len)
                 a[k++] = t[i];
             this.todos = a;
         }
