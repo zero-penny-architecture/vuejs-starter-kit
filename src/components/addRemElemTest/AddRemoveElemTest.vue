@@ -1,27 +1,28 @@
 <template>
 	<div>
-		<div>
+		<div class="m-2">
 			<p>New element</p>
 			<div>
-				<label for="quantity">id:</label>
-				<input type="number" name="quantity" id="quantity" value="-7" v-model="newTodo.id" />
-				<label for="newText">text:</label>
+				<label class="m-2" for="quantity">id:</label>
+				<input class="m-2" type="number" name="quantity" id="quantity" value="-7" v-model="newTodo.id" />
+				<label class="m-2" for="newText">text:</label>
 				<input
+					class="m-2"
 					type="text"
 					id="newText"
 					value="ignored value because it's bend by v-model"
 					v-model="newTodo.text"
 				/>
 			</div>
-			<button @click="appendNewItem()">Add item</button>
+			<button class="m-2" @click="appendNewItem()">Add item</button>
 		</div>
-		<div>
+		<div class="m-2">
 			<span>
-				<input type="number" name="itr" id="itr" min="0" :max="maxindex()" v-model="index" />
-				<button @click="removeAt()">Remove at {{index}}</button>
+				<input class="m-2" type="number" name="itr" id="itr" min="0" :max="maxindex()" v-model="index" />
+				<button @click="removeAt()" class="m-2">Remove at {{index}}</button>
 			</span>
 		</div>
-		<div>
+		<div class="m-2">
 			<button @click="removeAll()">Remove all Todos</button>
 		</div>
 	</div>
@@ -79,4 +80,7 @@ export default class AddRemoveElementTest extends Vue {
 
 
 <style lang="scss" scoped>
+.m-2 {
+	margin: 1vh;
+}
 </style>

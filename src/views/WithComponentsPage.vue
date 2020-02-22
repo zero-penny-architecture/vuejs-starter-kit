@@ -5,7 +5,7 @@
 		<button class="m-1" @click="goToHome()">Go to Home</button>
 		<h2>BEWARE: if you don't keep your precious datas on vuex (instances on store folder), then every changes will be lost !</h2>
 
-		<div v-if="showAlert">
+		<div v-if="showAlert" class="mceAlert">
 			<span>
 				<div>The child component {{myChildEventMsg.who}}</div>
 			</span>
@@ -69,4 +69,7 @@ export default class WithComponentsPage extends Vue {
 
 </script>
 <style lang="scss" scoped>
+.mceAlert {
+	border: 2px solid blue;
+}
 </style>
