@@ -50,9 +50,9 @@ export default class TodosStore extends VuexModule {
                 a.push(t[i]);
             this.todos = a;
             */
-            let i = -1, len = t.length, k = 0;
+            let i = 0, len = t.length, k = 0;
             let a = new Array(len - 1);
-            while (++i < index)
+            while (i++ < index)
                 a[i] = t[i];
             k = i;
             while (++i < len)

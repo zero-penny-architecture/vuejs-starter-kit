@@ -33,7 +33,7 @@
 import { Vue, Component, Prop } from "vue-class-decorator";
 import { todos } from "@/vuex";
 import { Todo } from "@/store/todos"
-import EventBusGolbal from "@/eventBus";
+import { MyChildEventMsg } from "@/views/WithComponentsPage.vue";
 
 @Component({})
 export default class AddRemoveElementTest extends Vue {
@@ -53,8 +53,8 @@ export default class AddRemoveElementTest extends Vue {
 	}
 
 	maxindex(): number {
-		let i = this.todos.todosAmount;
-		return i > 0 ? i - 1 : 0;
+		const todosAmount = this.todos.todosAmount;
+		return todosAmount > 0 ? todosAmount - 1 : 0;
 	}
 
 	removeAt(): void {
@@ -62,13 +62,12 @@ export default class AddRemoveElementTest extends Vue {
 	}
 	removeAll(): void {
 		//emit an event to the parent to notify the clear operation
-		let msg = {
+		let msg: MyChildEventMsg = {
 			who: "AddRemoveTodos",
 			content: "removed all " + this.todos.todosAmount + " todos in a bunch!"
 		};
 		this.todos.clearTodos();
-		//EventBusGolbal
-		this.$emit('myChildEvent', msg);
+		this.$emit('my-child-event', msg);
 	}
 
 
