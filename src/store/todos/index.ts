@@ -36,24 +36,12 @@ export default class TodosStore extends VuexModule {
 
     @action async removeAt(index: number): Promise<void> {
         if (index >= 0 && index < this.todos.length) {
-            /*this.todos = [
-                ...this.todos.slice(0, index),
-                ...this.todos.slice(index + 1, this.todos.length),
-            ]*/
             let t = this.todos;
-            /*
-            let a = [];
-            let i = -1, len = t.length;
-            while(++i < index)
-                a.push(t[i]);
-            while(++i < len)
-                a.push(t[i]);
-            this.todos = a;
-            */
             let i = 0, len = t.length, k = 0;
             let a = new Array(len - 1);
-            while (i++ < index)
-                a[i] = t[i];
+            while (i < index) {
+                a[i] = t[i]; i++;
+            }
             k = i;
             while (++i < len)
                 a[k++] = t[i];

@@ -1,8 +1,10 @@
 <template>
     <div>
-      <strong> Computed: {{computedInfo}} </strong> <br/>
-      <button @click="showAlert()"> Click Me! </button> <br/>
-      <button @click="goToHome()"> Go to Home </button>
+        <strong>Computed: {{computedInfo}}</strong>
+        <br />
+        <button @click="showAlert()">Click Me!</button>
+        <br />
+        <button @click="goToHome()">Go to Home</button>
     </div>
 </template>
 <script lang="ts">
@@ -10,19 +12,19 @@ import { Vue, Component } from 'vue-class-decorator';
 
 @Component({})
 export default class AboutPage extends Vue {
-    mounted() : void {
+    mounted(): void {
 
     }
 
-    get computedInfo() : string {
+    get computedInfo(): string {
         return "Computed" + " " + "about";
     }
 
-    showAlert() : void {
+    showAlert(): void {
         alert("Well done [in about]");
     }
 
-    goToHome() : void {
+    goToHome(): void {
         this.$router.push({
             name: "home"
         });
@@ -30,5 +32,4 @@ export default class AboutPage extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-
 </style>
