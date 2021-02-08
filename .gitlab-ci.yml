@@ -16,7 +16,7 @@ stages:
     paths:
       - .yarncache
   script:
-    - yarn install --progress=false --cache-folder .yarncache
+    - yarn install --peer --progress=false --cache-folder .yarncache
     - echo $AUTH0_CONFIG_JSON >> ./auth0_config.json
     - yarn vue-cli-service build --mode $BUILD_MODE
   artifacts:

@@ -2,8 +2,8 @@ import Vue from "vue";
 import Vuex, { Store } from "vuex";
 import ExampleStore from "@/store/example";
 import TodosStore from "@/store/todos";
-import { extractVuexModule, createProxy } from 'vuex-class-component';
-import { RootState } from '@/store/';
+import { extractVuexModule, createProxy } from "vuex-class-component";
+import { RootState } from "@/store/";
 
 Vue.use(Vuex);
 

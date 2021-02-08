@@ -16,7 +16,7 @@
 
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-class-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 import { todos } from "@/vuex";
 import { Todo } from "@/store/todos"
 

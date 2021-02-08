@@ -1,5 +1,5 @@
-import { createModule, action, mutation, getter } from "vuex-class-component";
-import { VuexModuleOptions } from 'vuex-class-component/dist/interfaces';
+import { createModule, action } from "vuex-class-component";
+import { VuexModuleOptions } from "vuex-class-component/dist/interfaces";
 
 const VuexModule = createModule({
     namespaced: "todosStore",

@@ -45,7 +45,7 @@
 
 
 <script lang="ts">
-import { Vue, Component, Prop } from "vue-class-decorator";
+import { Vue, Component, Prop } from "vue-property-decorator";
 import { todos } from "@/vuex";
 import { Todo } from "@/store/todos";
 import { MyChildEventMsg } from "@/views/WithComponentsPage.vue";
@@ -53,6 +53,7 @@ import { MyChildEventMsg } from "@/views/WithComponentsPage.vue";
 @Component({})
 export default class AddRemoveElementTest extends Vue {
     @Prop({}) todos = todos;
+    
     newTodo: Todo = { id: 0, text: "" };
     index: number = 0;
 
@@ -82,7 +83,7 @@ export default class AddRemoveElementTest extends Vue {
             content: "removed all " + this.todos.todosAmount + " todos in a bunch!"
         };
         this.todos.clearTodos();
-        this.$emit('my-child-event', msg);
+        this.$emit("my-child-event", msg);
     }
 
 

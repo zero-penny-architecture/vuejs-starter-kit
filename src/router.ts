@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import { Route } from 'vue-router/types/router';
+import { Route } from "vue-router/types/router";
 
 import {
   HomePage,

@@ -5,7 +5,7 @@
         <button class="m-1" @click="goToHome()">Go to Home</button>
         <h2>BEWARE: if you don't keep your precious datas on vuex (instances on store folder), then every change will be lost !</h2>
 
-        <div v-if="showAlert" class="mceAlert">
+        <div v-if="showAlert" class="mce-alert">
             <span>
                 <div>The child component {{myChildEventMsg.who}}</div>
             </span>
@@ -20,11 +20,10 @@
     </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from 'vue-class-decorator';
-import { ListElementTest } from '@/components'
-import { AddRemoveElementTest } from '@/components'
+import { Vue, Component } from "vue-property-decorator";
+import { ListElementTest } from "@/components"
+import { AddRemoveElementTest } from "@/components"
 import { todos } from "@/vuex";
-
 
 export type MyChildEventMsg = {
     who: string;
@@ -39,21 +38,15 @@ export type MyChildEventMsg = {
 })
 export default class WithComponentsPage extends Vue {
     todos = todos;
-    private showAlert: boolean = false;
-    private myChildEventMsg: MyChildEventMsg = { who: "", content: "" };
-
-    mounted(): void {
-    }
+    showAlert: boolean = false;
+    myChildEventMsg: MyChildEventMsg = { who: "", content: "" };
 
     get computedInfo(): number {
         return this.itemCount;
     }
+
     get itemCount(): number {
         return this.todos.todosAmount;
-    }
-
-    get getMyself(): Vue {
-        return this;
     }
 
     goToHome(): void {
@@ -73,7 +66,7 @@ export default class WithComponentsPage extends Vue {
 
 </script>
 <style lang="scss" scoped>
-.mceAlert {
+.mce-alert {
     border: 2px solid blue;
 }
 </style>
