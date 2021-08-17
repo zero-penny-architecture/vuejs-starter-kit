@@ -37,7 +37,9 @@ const router = new Router({
 
 // puts the meta title as window title.
 router.beforeEach((to: Route, _: Route, next) => {
-  document.title = to.meta.title;
+  if (to.meta) {
+    document.title = to.meta.title;
+  }
   next();
 })
 

@@ -18,11 +18,11 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { todos } from "@/vuex";
-import { Todo } from "@/store/todos"
+import TodosStore from "@/store/todos";
 
 @Component({})
 export default class ListElementTest extends Vue {
-    @Prop({}) todos = todos;
+    @Prop({ default: todos }) todos! : TodosStore;
 
     removeAt(i: number): void {
         this.todos.removeAt(i);

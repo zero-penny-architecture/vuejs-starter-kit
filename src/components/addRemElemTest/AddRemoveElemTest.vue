@@ -47,12 +47,12 @@
 <script lang="ts">
 import { Vue, Component, Prop } from "vue-property-decorator";
 import { todos } from "@/vuex";
-import { Todo } from "@/store/todos";
+import TodosStore, { Todo } from "@/store/todos";
 import { MyChildEventMsg } from "@/views/WithComponentsPage.vue";
 
 @Component({})
 export default class AddRemoveElementTest extends Vue {
-    @Prop({}) todos = todos;
+    @Prop({ default: todos }) todos! : TodosStore;
     
     newTodo: Todo = { id: 0, text: "" };
     index: number = 0;
