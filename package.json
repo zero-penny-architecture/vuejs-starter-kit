@@ -28,6 +28,6 @@
     "stylus-loader": "^6.1.0",
     "typescript": "^4.3.5",
     "vue-template-compiler": "^2.6.14",
-    "webpack": "^5.0.0"
+    "webpack": "^5.76.0"
   }
 }
